@@ -25,6 +25,10 @@ import { useState } from "react";
 
 280521
 14-41
+
+020622
+15-53
+20-52
 */
 
 //import { nanoid } from 'https://cdn.jsdelivr.net/npm/nanoid/nanoid.js'
@@ -69,12 +73,40 @@ export default function App() {
   /* const [worldsEng, setWorldsEng] = useState(arrEngInit);
   const [worldsRus, setWorldsRus] = useState(arrRusInit); */
 
+  const [checked, setChecked] = useState(false);
+
   const [worldsEngRus, setWorldsEngRus] = useState(arrRusEngInit);
+
+  /*   let arrCheckbox = worldsEngRus.map((item) => {
+    return false;
+  }); */
+
+  const [arrCheckbox, setArrCheckbox] = useState(
+    worldsEngRus.map((item) => {
+      return false;
+    })
+  );
 
   const resultWorlds = worldsEngRus.map((item, index) => {
     return (
       <tr key={nanoid()}>
-        <td>ch</td>
+        <td>
+          <input
+            type="checkbox"
+            checked={arrCheckbox[index]}
+            onChange={
+              /*  (e) => console.log(item, index) */
+              () =>
+                setArrCheckbox([
+                  ...arrCheckbox.slice(0, index),
+                  !arrCheckbox[index],
+                  ...arrCheckbox.slice(index + 1)
+                ])
+              /*  [...arrCheckbox.slice(0, index), !arrCheckbox[index], 
+		...arrCheckbox.slice(index + 1)] */
+            }
+          />
+        </td>
         <td>{item[0]}</td>
         <td>{item[1]}</td>
         <td>del</td>
@@ -105,7 +137,7 @@ export default function App() {
       <table>
         <tbody>
           <tr>
-            <td>checbox</td>
+            <td>c-box</td>
             <td>eng</td>
             <td>rus</td>
             <td>del</td>
