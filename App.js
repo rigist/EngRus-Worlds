@@ -109,10 +109,30 @@ export default function App() {
         </td>
         <td>{item[0]}</td>
         <td>{item[1]}</td>
-        <td>del</td>
+        {/* <td>del</td> */}
       </tr>
     );
   });
+
+  const checkedWorlds = worldsEngRus.filter((item, index) => {
+    if (arrCheckbox[index]) {
+      return true;
+    }
+  });
+
+  /*  console.log("1r", checkedWorlds); */
+
+  const resultCheckWorlds = checkedWorlds.map((item, index) => {
+    return (
+      <div key={nanoid()}>
+        <p>
+          {item[0]}-{item[1]}
+        </p>
+      </div>
+    );
+  });
+
+  /*  console.log("r", resultCheckWorlds); */
 
   /*  const [worlds, setWorlds] = useState([arrEngInit, arrRusInit]); */
   /*  console.log("worlds 64", worlds);
@@ -137,14 +157,26 @@ export default function App() {
       <table>
         <tbody>
           <tr>
-            <td>c-box</td>
+            <td>
+              <input
+                type="checkbox"
+                onChange={() => {
+                  setArrCheckbox(
+                    arrCheckbox.map((item) => {
+                      return true;
+                    })
+                  );
+                }}
+              />
+            </td>
             <td>eng</td>
             <td>rus</td>
-            <td>del</td>
+            {/*  <td>del</td> */}
           </tr>
           {resultWorlds}
         </tbody>
       </table>
+      {resultCheckWorlds}
     </div>
   );
 } //App
